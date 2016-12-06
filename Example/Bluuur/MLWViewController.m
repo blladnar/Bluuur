@@ -13,6 +13,7 @@
 @interface MLWViewController ()
 
 @property (weak, nonatomic) IBOutlet MLWLiveBlurView *blurView;
+@property (weak, nonatomic) IBOutlet UILabel *dragMe;
 
 @end
 
@@ -22,6 +23,10 @@
     [super viewDidLoad];
 
     self.blurView.blurProgress = 0.1;
+
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
+        self.dragMe.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.5, 1.5);
+    } completion:nil];
 }
 
 - (IBAction)radiusChanged:(UISlider *)sender {

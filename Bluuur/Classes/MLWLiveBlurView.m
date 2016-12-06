@@ -35,13 +35,22 @@
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.effect = effectToAnimate;
     } completion:nil];
-    [self.layer.sublayers setValue:@0.0 forKey:@"timeOffset"];
-    [self.layer.sublayers setValue:@0.0 forKey:@"speed"];
+
+    for(CALayer *layer in self.layer.sublayers) {
+        if(layer != self.contentView.layer) {
+            [layer setValue:@0.0 forKey:@"timeOffset"];
+            [layer setValue:@0.0 forKey:@"speed"];
+        }
+    }
 }
 
 - (void)setBlurProgress:(CGFloat)blurProgress {
     _blurProgress = blurProgress;
-    [self.layer.sublayers setValue:@(blurProgress) forKey:@"timeOffset"];
+    for(CALayer *layer in self.layer.sublayers) {
+        if(layer != self.contentView.layer) {
+            [layer setValue:@(blurProgress) forKey:@"timeOffset"];
+        }
+    }
 }
 
 - (void)didMoveToWindow {
